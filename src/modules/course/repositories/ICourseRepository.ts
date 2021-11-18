@@ -1,5 +1,0 @@
-interface ICourseRepository {
-
-}
-
-export { ICourseRepository }
