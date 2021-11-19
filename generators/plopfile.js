@@ -4,13 +4,18 @@ module.exports = (plop) => {
     prompts: [
       {
         type: 'list',
-        name: 'module',
+        name: 'option',
         message: 'Choose one option to generate the file:',
         choices: [
           { name: "Model", value: "model" },
           { name: "Repository", value: "repository" },
           { name: "Service", value: "service" },
         ],
+      },
+      {
+        type: 'input',
+        name: 'module',
+        message: 'What is the name of the module?'
       },
       {
         type: 'input',
@@ -21,30 +26,30 @@ module.exports = (plop) => {
     actions: function (data) {
       var actions = [];
 
-      switch (data.module) {
+      switch (data.option) {
         case 'model':
           actions.push({
             type: 'add',
-            path: '../src/modules/{{lowerCase name}}/model/{{properCase name}}.ts',
+            path: '../src/modules/{{lowerCase module}}/model/{{properCase name}}.ts',
             templateFile: 'templates/Model.hbs'
           });
           return actions
         case 'repository':
           actions.push({
             type: 'add',
-            path: '../src/modules/{{lowerCase name}}/repositories/{{properCase name}}Repository.ts',
+            path: '../src/modules/{{lowerCase module}}/repositories/{{properCase name}}Repository.ts',
             templateFile: 'templates/Repository.hbs'
           });
           actions.push({
             type: 'add',
-            path: '../src/modules/{{lowerCase name}}/repositories/I{{properCase name}}Repository.ts',
+            path: '../src/modules/{{lowerCase module}}/repositories/I{{properCase name}}Repository.ts',
             templateFile: 'templates/IRepository.hbs'
           });
           return actions
         case 'service':
           actions.push({
             type: 'add',
-            path: '../src/modules/{{lowerCase name}}/services/{{properCase name}}Service.ts',
+            path: '../src/modules/{{lowerCase module}}/services/{{properCase name}}Service.ts',
             templateFile: 'templates/Service.hbs'
           });
           return actions
